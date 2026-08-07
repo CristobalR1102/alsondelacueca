@@ -1,0 +1,59 @@
+@import '@fontsource/playfair-display/400.css';
+@import '@fontsource/playfair-display/700.css';
+@import '@fontsource/playfair-display/400-italic.css';
+@import '@fontsource/lato/400.css';
+@import '@fontsource/lato/700.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Lato', system-ui, sans-serif;
+  background-color: #FAF3E0;
+  color: #1A1A1A;
+}
+
+.font-display { font-family: 'Playfair Display', Georgia, serif; }
+
+/* Línea decorativa cueca */
+.linea-cueca {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.linea-cueca::before,
+.linea-cueca::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #B8860B;
+}
+
+/* Botón WhatsApp flotante */
+.btn-wsp {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 50;
+  background: #25D366;
+  color: white;
+  border-radius: 9999px;
+  width: 3.5rem;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-wsp:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
