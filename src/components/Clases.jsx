@@ -87,7 +87,7 @@ export default function Clases() {
             ¿Tienes dudas sobre qué nivel elegir?
           </p>
           <a
-            href="https://wa.me/56912345678?text=Hola!%20Quisiera%20saber%20qu%C3%A9%20nivel%20de%20cueca%20me%20conviene."
+            href="https://wa.me/56991555287?text=Hola!%20Quisiera%20saber%20qu%C3%A9%20nivel%20de%20cueca%20me%20conviene."
             target="_blank"
             rel="noreferrer"
             className="inline-block bg-carbon hover:bg-tierra text-crema font-bold px-8 py-3 rounded transition-colors text-sm"

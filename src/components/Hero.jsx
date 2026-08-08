@@ -56,7 +56,7 @@ export default function Hero() {
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
-            href="https://wa.me/56912345678?text=Hola!%20Quiero%20inscribirme%20en%20la%20academia%20Al%20Son%20de%20la%20Cueca."
+            href="https://wa.me/56991555287?text=Hola!%20Quiero%20inscribirme%20en%20la%20academia%20Al%20Son%20de%20la%20Cueca."
             target="_blank"
             rel="noreferrer"
             className="bg-rojo hover:bg-red-700 text-white font-bold px-8 py-3 rounded transition-all hover:scale-105 shadow-lg text-sm tracking-wide"

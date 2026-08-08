@@ -1,7 +1,7 @@
 export default function WspFloat() {
   return (
     <a
-      href="https://wa.me/56912345678?text=Hola!%20Me%20interesa%20inscribirme%20en%20Al%20Son%20de%20la%20Cueca."
+      href="https://wa.me/56991555287?text=Hola!%20Me%20interesa%20inscribirme%20en%20Al%20Son%20de%20la%20Cueca."
       target="_blank"
       rel="noreferrer"
       className="btn-wsp"
