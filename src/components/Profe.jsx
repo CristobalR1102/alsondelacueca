@@ -1,9 +1,10 @@
 import { Award, Music, Users } from "lucide-react";
 
 const logros = [
-  { icon: Award, texto: "Más de 10 años enseñando cueca en Santiago" },
-  { icon: Music,  texto: "Participante en Fiestas Patrias y festivales folclóricos" },
-  { icon: Users,  texto: "Más de 200 alumnos formados en la academia" },
+  { icon: Award, texto: "Vicecampeón Nacional Junior 2009 · representando Maipú" },
+  { icon: Award, texto: "Vicecampeón Regional Juvenil, Punta Arenas 2011 · representando Maipú" },
+  { icon: Award, texto: "Campeón Nacional de Cueca Escolar 2012 · representando Maipú" },
+  { icon: Award, texto: "Vicecampeón Regional Adulto, Arica 2017 · representando la Región Metropolitana" },
 ];
 
 export default function Profe() {
@@ -33,10 +34,10 @@ export default function Profe() {
               Conoce al profe
             </p>
             <h2 className="font-display text-crema text-4xl md:text-5xl font-bold italic mb-2">
-              [Nombre del profe]
+              Bastián Villalobos
             </h2>
             <p className="font-display text-dorado text-lg mb-6">
-              Cultor y bailarín de cueca chilena
+              Cultor, bailarín y competidor de cueca chilena
             </p>
 
             <div className="linea-cueca mb-6">
@@ -44,13 +45,13 @@ export default function Profe() {
             </div>
 
             <p className="font-body text-crema/70 leading-relaxed mb-4">
-              Nació con la cueca en la sangre. Desde joven participó en grupos folclóricos de 
-              Maipú, donde aprendió de los grandes cultores de la cueca chora y campesina. 
-              Hoy lleva más de una década transmitiendo esa pasión a nuevas generaciones.
+              Maipucino de corazón, Bastián lleva toda su vida ligado a la cueca. Desde joven 
+              representó a la comuna de Maipú en competencias a nivel regional y nacional, 
+              cosechando títulos que lo consolidaron como uno de los referentes jóvenes del baile nacional.
             </p>
             <p className="font-body text-crema/70 leading-relaxed mb-8">
-              En "Al Son de la Cueca" no solo enseñamos pasos: enseñamos la historia, 
-              el zapateo, el pañuelo y la picardía que hace grande a nuestro baile nacional.
+              Hoy canaliza esa trayectoria en la academia, donde transmite no solo la técnica 
+              del zapateo y el pañuelo, sino también el espíritu y la picardía que hacen única a la cueca chilena.
             </p>
 
             {/* Logros */}

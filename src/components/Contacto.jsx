@@ -39,7 +39,7 @@ export default function Contacto() {
                 </div>
                 <div>
                   <p className="font-body text-crema/50 text-xs uppercase tracking-widest">Clases</p>
-                  <p className="font-body text-crema text-sm">Lunes a Viernes desde las 19:00</p>
+                  <p className="font-body text-crema text-sm">Miércoles y Jueves · 19:00 – 21:00 hrs</p>
                 </div>
               </div>
 
@@ -50,12 +50,12 @@ export default function Contacto() {
                 <div>
                   <p className="font-body text-crema/50 text-xs uppercase tracking-widest">Instagram</p>
                   <a
-                    href="https://instagram.com/alsondelacueca"
+                    href="https://www.instagram.com/academia_alsondelacueca/"
                     target="_blank"
                     rel="noreferrer"
                     className="font-body text-crema text-sm hover:text-dorado transition-colors"
                   >
-                    @alsondelacueca
+                    @academia_alsondelacueca
                   </a>
                 </div>
               </div>
@@ -75,7 +75,7 @@ export default function Contacto() {
               Te respondemos el mismo día.
             </p>
             <a
-              href="https://wa.me/56912345678?text=Hola!%20Me%20interesa%20inscribirme%20en%20Al%20Son%20de%20la%20Cueca.%20%C2%BFPodr%C3%ADan%20darme%20m%C3%A1s%20informaci%C3%B3n?"
+              href="https://wa.me/56991555287?text=Hola!%20Me%20interesa%20inscribirme%20en%20Al%20Son%20de%20la%20Cueca.%20%C2%BFPodr%C3%ADan%20darme%20m%C3%A1s%20informaci%C3%B3n?"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-bold px-8 py-3 rounded transition-colors text-sm"
@@ -84,7 +84,7 @@ export default function Contacto() {
               Abrir WhatsApp
             </a>
             <p className="font-body text-crema/30 text-xs mt-4">
-              También puedes llamar al +56 9 1234 5678
+              También puedes llamar al +56 9 9155 5287
             </p>
           </div>
         </div>

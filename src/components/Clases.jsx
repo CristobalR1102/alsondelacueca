@@ -4,8 +4,8 @@ const niveles = [
   {
     nivel: "Principiantes",
     descripcion: "Para quienes nunca han bailado cueca. Aprende los pasos básicos, la postura y el ritmo desde cero.",
-    dias: "Lunes y Miércoles",
-    horario: "19:00 – 20:30",
+    dias: "Miércoles y Jueves",
+    horario: "19:00 – 21:00",
     cupos: "Cupos disponibles",
     color: "border-dorado",
     badge: "bg-dorado",
@@ -13,8 +13,8 @@ const niveles = [
   {
     nivel: "Intermedio",
     descripcion: "Perfecciona tu técnica, mejora el zapateo y aprende las variaciones regionales de la cueca.",
-    dias: "Martes y Jueves",
-    horario: "19:00 – 20:30",
+    dias: "Miércoles y Jueves",
+    horario: "19:00 – 21:00",
     cupos: "Cupos disponibles",
     color: "border-rojo",
     badge: "bg-rojo",
@@ -22,9 +22,9 @@ const niveles = [
   {
     nivel: "Avanzado",
     descripcion: "Para bailarines con experiencia. Preparación para presentaciones, concursos y folclore escénico.",
-    dias: "Viernes",
-    horario: "18:00 – 20:00",
-    cupos: "Consultar disponibilidad",
+    dias: "Horario a coordinar",
+    horario: "Consultar con el profesor",
+    cupos: "Clase personalizada",
     color: "border-tierra",
     badge: "bg-tierra",
   },
@@ -46,7 +46,7 @@ export default function Clases() {
             <span className="text-dorado">✦</span>
           </div>
           <p className="font-body text-carbon/60 mt-4 max-w-md mx-auto">
-            Clases presenciales en Maipú. Grupos reducidos para una atención personalizada.
+            Clases presenciales en Maipú. Miércoles y Jueves de 19:00 a 21:00 hrs.
           </p>
         </div>
 
