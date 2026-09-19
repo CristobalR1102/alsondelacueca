@@ -3,6 +3,7 @@ import Hero         from "./components/Hero";
 import Clases       from "./components/Clases";
 import Profe        from "./components/Profe";
 import Galeria      from "./components/Galeria";
+import Playlist     from "./components/Playlist";
 import Testimonios  from "./components/Testimonios";
 import FAQ          from "./components/FAQ";
 import Contacto     from "./components/Contacto";
@@ -18,6 +19,7 @@ export default function App() {
         <Clases />
         <Profe />
         <Galeria />
+        <Playlist />
         <Testimonios />
         <FAQ />
         <Contacto />
