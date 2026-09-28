@@ -35,7 +35,16 @@ export default function Alumnos() {
     const { data, error } = await supabase.functions.invoke("create-student", { body: form });
     setCreando(false);
     if (error) {
-      setMensaje({ tipo: "error", texto: error.message });
+      let texto = error.message;
+      if (error.context) {
+        try {
+          const cuerpo = await error.context.json();
+          if (cuerpo?.error) texto = cuerpo.error;
+        } catch {
+          // el cuerpo no era JSON, nos quedamos con error.message
+        }
+      }
+      setMensaje({ tipo: "error", texto });
       return;
     }
     if (data?.error) {
