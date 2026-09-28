@@ -4,7 +4,7 @@ const niveles = [
   {
     nivel: "Principiantes",
     descripcion: "Para quienes nunca han bailado cueca. Aprende los pasos básicos, la postura y el ritmo desde cero.",
-    dias: "Miércoles y Jueves",
+    dias: "Miércoles y Viernes",
     horario: "19:00 – 21:00",
     cupos: "Cupos disponibles",
     color: "border-dorado",
@@ -13,7 +13,7 @@ const niveles = [
   {
     nivel: "Intermedio",
     descripcion: "Perfecciona tu técnica, mejora el zapateo y aprende las variaciones regionales de la cueca.",
-    dias: "Miércoles y Jueves",
+    dias: "Miércoles y Viernes",
     horario: "19:00 – 21:00",
     cupos: "Cupos disponibles",
     color: "border-rojo",
@@ -46,7 +46,7 @@ export default function Clases() {
             <span className="text-dorado">✦</span>
           </div>
           <p className="font-body text-carbon/60 mt-4 max-w-md mx-auto">
-            Clases presenciales en Maipú. Miércoles y Jueves de 19:00 a 21:00 hrs.
+            Clases presenciales en Maipú. Miércoles y Viernes de 19:00 a 21:00 hrs.
           </p>
         </div>
 

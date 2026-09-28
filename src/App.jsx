@@ -1,6 +1,7 @@
 import Navbar       from "./components/Navbar";
 import Hero         from "./components/Hero";
 import Clases       from "./components/Clases";
+import Planes       from "./components/Planes";
 import Profe        from "./components/Profe";
 import Galeria      from "./components/Galeria";
 import Playlist     from "./components/Playlist";
@@ -17,6 +18,7 @@ export default function App() {
       <main>
         <Hero />
         <Clases />
+        <Planes />
         <Profe />
         <Galeria />
         <Playlist />

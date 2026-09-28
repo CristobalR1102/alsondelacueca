@@ -9,9 +9,15 @@ export default function Footer() {
         <p className="font-body text-crema/30 text-xs text-center">
           © {new Date().getFullYear()} Academia de Cueca Chilena · Maipú, Santiago
         </p>
-        <p className="font-body text-crema/20 text-xs">
-          Hecho con ❤️ en Chile
-        </p>
+        <div className="flex items-center gap-4">
+          <a
+            href="/portal"
+            className="font-body text-crema/40 hover:text-dorado text-xs transition-colors"
+          >
+            Portal de alumnos
+          </a>
+          <p className="font-body text-crema/20 text-xs">Hecho con ❤️ en Chile</p>
+        </div>
       </div>
     </footer>
   );
