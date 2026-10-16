@@ -12,8 +12,8 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Lato', system-ui, sans-serif;
-  background-color: #FAF3E0;
-  color: #1A1A1A;
+  background-color: #FAF6EC;
+  color: #08142A;
 }
 
 .font-display { font-family: 'Playfair Display', Georgia, serif; }
@@ -29,7 +29,7 @@ body {
   content: '';
   flex: 1;
   height: 1px;
-  background: #B8860B;
+  background: #D4A23A;
 }
 
 /* Botón WhatsApp flotante */

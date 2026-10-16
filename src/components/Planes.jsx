@@ -122,7 +122,7 @@ export default function Planes() {
                 rel="noreferrer"
                 className={`text-center font-bold px-6 py-3 rounded transition-colors text-sm ${
                   p.destacado
-                    ? "bg-dorado hover:bg-yellow-600 text-carbon"
+                    ? "bg-dorado hover:brightness-110 text-carbon"
                     : "bg-carbon hover:bg-tierra text-crema"
                 }`}
               >

@@ -9,7 +9,7 @@ const fotos = [
   { id: 5, alt: "Evento folclórico", span: "col-span-2" },
 ];
 
-const colores = ["#2C1810", "#3D2B1F", "#1A1A1A", "#4A3728", "#2A1F17", "#35261A"];
+const colores = ["#0F2147", "#16295A", "#08142A", "#1E3A8A", "#0B1A3A", "#132653"];
 
 export default function Galeria() {
   return (

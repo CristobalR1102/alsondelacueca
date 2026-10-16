@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import logoMark from "../assets/logo-mark.webp";
 
 const links = [
   { label: "Inicio",    href: "#inicio" },
@@ -30,9 +31,18 @@ export default function Navbar() {
     >
       <div className="max-w-6xl mx-auto px-4 flex items-center justify-between">
         {/* Logo */}
-        <a href="#inicio" className="flex flex-col leading-none">
-          <span className="font-display text-dorado text-lg font-bold italic">Al Son</span>
-          <span className="font-display text-crema text-xs tracking-widest uppercase">de la Cueca</span>
+        <a href="#inicio" className="flex items-center gap-3 leading-none">
+          <img
+            src={logoMark}
+            alt=""
+            width="44"
+            height="44"
+            className="w-11 h-11 rounded-full ring-1 ring-dorado/60"
+          />
+          <span className="flex flex-col">
+            <span className="font-display text-dorado text-lg font-bold italic">Al Son</span>
+            <span className="font-display text-crema text-xs tracking-widest uppercase">de la Cueca</span>
+          </span>
         </a>
 
         {/* Desktop nav */}
@@ -50,7 +60,7 @@ export default function Navbar() {
             href="https://wa.me/56991555287?text=Hola!%20Me%20interesa%20inscribirme%20en%20la%20academia."
             target="_blank"
             rel="noreferrer"
-            className="bg-rojo hover:bg-red-700 text-white text-sm font-bold px-4 py-2 rounded transition-colors"
+            className="bg-rojo hover:bg-granate text-white text-sm font-bold px-4 py-2 rounded transition-colors"
           >
             Inscríbete
           </a>

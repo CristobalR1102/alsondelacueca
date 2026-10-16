@@ -55,7 +55,7 @@ export default function Checkin() {
   return (
     <div
       className="min-h-screen flex items-center justify-center px-4 text-center"
-      style={{ background: "linear-gradient(135deg, #1A1A1A 0%, #2C1810 50%, #1A1A1A 100%)" }}
+      style={{ background: "linear-gradient(135deg, #08142A 0%, #0F2147 50%, #08142A 100%)" }}
     >
       <div className="max-w-sm w-full bg-crema rounded-lg p-8 shadow-lg">
         {estado === "cargando" && <p className="font-body text-carbon/60 text-sm">Registrando...</p>}
