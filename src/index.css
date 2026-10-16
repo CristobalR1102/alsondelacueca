@@ -18,6 +18,25 @@ body {
 
 .font-display { font-family: 'Playfair Display', Georgia, serif; }
 
+/* Portal (tema oscuro) */
+@layer components {
+  .portal-card {
+    @apply bg-white/[0.04] border border-white/10 rounded-xl;
+  }
+  .portal-input {
+    @apply bg-carbon border border-white/15 rounded px-3 py-2 text-sm font-body text-crema placeholder:text-crema/30 focus:outline-none focus:border-dorado;
+  }
+  .portal-btn {
+    @apply bg-dorado hover:brightness-110 text-carbon font-bold px-5 py-2 rounded text-sm transition disabled:opacity-50;
+  }
+  .portal-titulo {
+    @apply font-display text-crema text-xl font-bold;
+  }
+  .portal-eyebrow {
+    @apply font-body text-dorado text-[11px] tracking-[0.2em] uppercase font-bold;
+  }
+}
+
 /* Línea decorativa cueca */
 .linea-cueca {
   display: flex;

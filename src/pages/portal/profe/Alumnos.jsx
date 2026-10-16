@@ -63,8 +63,8 @@ export default function Alumnos() {
 
   return (
     <div className="space-y-8">
-      <form onSubmit={crearAlumno} className="bg-crema rounded-lg p-6 shadow-sm border border-carbon/5">
-        <h2 className="font-display text-carbon text-lg font-bold mb-4 flex items-center gap-2">
+      <form onSubmit={crearAlumno} className="portal-card p-6">
+        <h2 className="font-display text-crema text-lg font-bold mb-4 flex items-center gap-2">
           <UserPlus size={18} className="text-dorado" />
           Invitar alumno nuevo
         </h2>
@@ -75,7 +75,7 @@ export default function Alumnos() {
             placeholder="Nombre"
             value={form.nombre}
             onChange={(e) => setForm({ ...form, nombre: e.target.value })}
-            className="px-3 py-2 rounded border border-carbon/20 text-sm font-body focus:outline-none focus:border-dorado"
+            className="portal-input"
           />
           <input
             required
@@ -83,12 +83,12 @@ export default function Alumnos() {
             placeholder="Correo"
             value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
-            className="px-3 py-2 rounded border border-carbon/20 text-sm font-body focus:outline-none focus:border-dorado"
+            className="portal-input"
           />
           <select
             value={form.plan}
             onChange={(e) => setForm({ ...form, plan: e.target.value })}
-            className="px-3 py-2 rounded border border-carbon/20 text-sm font-body focus:outline-none focus:border-dorado"
+            className="portal-input"
           >
             {PLANES.map((p) => (
               <option key={p.value} value={p.value}>
@@ -100,36 +100,36 @@ export default function Alumnos() {
         <button
           type="submit"
           disabled={creando}
-          className="mt-4 bg-carbon hover:bg-tierra text-crema font-bold px-5 py-2 rounded text-sm transition-colors disabled:opacity-50"
+          className="portal-btn mt-4"
         >
           {creando ? "Enviando..." : "Enviar invitación"}
         </button>
         {mensaje && (
-          <p className={`mt-3 text-sm font-body ${mensaje.tipo === "error" ? "text-rojo" : "text-green-700"}`}>
+          <p className={`mt-3 text-sm font-body ${mensaje.tipo === "error" ? "text-rojo" : "text-green-400"}`}>
             {mensaje.texto}
           </p>
         )}
       </form>
 
       <div>
-        <h2 className="font-display text-carbon text-lg font-bold mb-4">Alumnos ({alumnos.length})</h2>
+        <h2 className="font-display text-crema text-lg font-bold mb-4">Alumnos ({alumnos.length})</h2>
         {cargando ? (
-          <p className="font-body text-carbon/50 text-sm">Cargando...</p>
+          <p className="font-body text-crema/50 text-sm">Cargando...</p>
         ) : alumnos.length === 0 ? (
-          <p className="font-body text-carbon/50 text-sm">Todavía no has invitado alumnos.</p>
+          <p className="font-body text-crema/50 text-sm">Todavía no has invitado alumnos.</p>
         ) : (
           <div className="space-y-2">
             {alumnos.map((a) => (
               <div
                 key={a.id}
-                className="bg-crema rounded-lg p-4 border border-carbon/5 flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between"
+                className="portal-card p-4 flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between"
               >
-                <span className="font-body font-bold text-carbon text-sm">{a.nombre}</span>
+                <span className="font-body font-bold text-crema text-sm">{a.nombre}</span>
                 <div className="flex items-center gap-3">
                   <select
                     value={a.plan || ""}
                     onChange={(e) => actualizarAlumno(a.id, { plan: e.target.value || null })}
-                    className="px-2 py-1 rounded border border-carbon/20 text-xs font-body"
+                    className="bg-carbon border border-white/15 rounded px-2 py-1 text-xs font-body text-crema"
                   >
                     <option value="">Sin plan</option>
                     {PLANES.map((p) => (
@@ -144,7 +144,7 @@ export default function Alumnos() {
                       min={0}
                       value={a.clases_restantes}
                       onChange={(e) => actualizarAlumno(a.id, { clases_restantes: Number(e.target.value) })}
-                      className="w-16 px-2 py-1 rounded border border-carbon/20 text-xs font-body"
+                      className="w-16 bg-carbon border border-white/15 rounded px-2 py-1 text-xs font-body text-crema"
                     />
                   )}
                 </div>

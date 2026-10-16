@@ -32,19 +32,26 @@ Spotify), Testimonios, FAQ, Contacto, Footer (con link a `/portal`), WspFloat.
 - **Login**: magic link (sin contraseña) vía `supabase.auth.signInWithOtp`.
 - **`AuthContext`** (`src/context/AuthContext.jsx`): expone `session`, `user`,
   `profile` (fila de la tabla `profiles`), `loading`, `signOut`.
-- **`/portal`** (`src/pages/Portal.jsx`): muestra `AlumnoDashboard` o
-  `ProfePanel` según `profile.rol`.
-- **Alumno** (`src/pages/portal/AlumnoDashboard.jsx`): ve su plan, clases
-  restantes (si es plan `4_clases`), historial de asistencia y las bitácoras
-  del profe.
-- **Profe** (`src/pages/portal/ProfePanel.jsx`, 3 pestañas):
-  - `TomarAsistencia`: genera un QR por sesión de clase (fila en `sesiones`),
+- **`/portal`**: tema oscuro (paleta del logo) con rutas anidadas en
+  `src/main.jsx`. `PortalLayout` tiene header + barra inferior en el celular
+  (pestañas arriba en escritorio), con tabs distintas por rol. `SoloRol`
+  protege las rutas de cada rol. Plan de las próximas fases en
+  [`docs/PLAN-PORTAL.md`](docs/PLAN-PORTAL.md).
+- **Inicio** (`src/pages/portal/Inicio.jsx`): saludo, tarjeta "Lo próximo"
+  (próxima clase calculada con la regla fija mié/vie en `src/lib/clases.js`,
+  todavía no hay tabla de eventos) y KPIs.
+- **Agenda** (`/portal/agenda`): próximas 8 clases según esa regla.
+- **Alumno**: Inicio (clases restantes, asistencias del mes/total, última
+  bitácora), `/portal/mi-asistencia` y `/portal/bitacora`.
+- **Profe**: Inicio (alumnos, asistencias del mes, alumnos sin clases o sin
+  plan, accesos rápidos) y estas rutas:
+  - `/portal/asistencia` → `TomarAsistencia`: genera un QR por sesión de clase (fila en `sesiones`),
     los alumnos lo escanean con su celular y aparecen en vivo (Supabase
     Realtime) en la lista de asistentes.
-  - `Bitacoras`: publicar/borrar notas de la clase (visibles para alumnos).
+  - `/portal/bitacoras` → `Bitacoras`: publicar/borrar notas de la clase (visibles para alumnos).
     Funciona bien; pendiente hacerlas "más interactivas" a futuro (idea sin
     definir aún — fotos, reacciones, comentarios, etc.).
-  - `Alumnos`: invitar alumnos nuevos (llama a la Edge Function
+  - `/portal/alumnos` → `Alumnos`: invitar alumnos nuevos (llama a la Edge Function
     `create-student`) y ajustar manualmente plan / clases restantes.
 - **`/checkin/:token`** (`src/pages/Checkin.jsx`): a donde cae el alumno al
   escanear el QR. Si no tiene sesión iniciada, pide login (limitación

@@ -62,11 +62,11 @@ export default function TomarAsistencia() {
   const urlCheckin = sesion ? `${window.location.origin}/checkin/${sesion.token}` : "";
 
   return (
-    <div className="bg-crema rounded-lg p-6 shadow-sm border border-carbon/5">
+    <div className="portal-card p-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
-          <h2 className="font-display text-carbon text-xl font-bold">Clase de hoy</h2>
-          <p className="font-body text-carbon/50 text-sm">
+          <h2 className="portal-titulo">Clase de hoy</h2>
+          <p className="font-body text-crema/50 text-sm">
             {sesion
               ? `Sesión generada — ${sesion.fecha}`
               : "Genera el QR para que los alumnos marquen su asistencia"}
@@ -75,7 +75,7 @@ export default function TomarAsistencia() {
         <button
           onClick={generarQR}
           disabled={generando}
-          className="flex items-center justify-center gap-2 bg-carbon hover:bg-tierra text-crema font-bold px-4 py-2 rounded text-sm transition-colors disabled:opacity-50"
+          className="portal-btn flex items-center justify-center gap-2"
         >
           <RefreshCw size={16} />
           {sesion ? "Generar nuevo QR" : "Generar QR"}
@@ -88,19 +88,19 @@ export default function TomarAsistencia() {
             <div className="bg-white p-4 rounded-lg">
               <QRCodeSVG value={urlCheckin} size={200} />
             </div>
-            <p className="font-body text-carbon/40 text-xs text-center break-all">{urlCheckin}</p>
+            <p className="font-body text-crema/40 text-xs text-center break-all">{urlCheckin}</p>
           </div>
 
           <div>
-            <h3 className="font-body font-bold text-carbon text-sm mb-3">
+            <h3 className="font-body font-bold text-crema text-sm mb-3">
               Asistentes ({asistentes.length})
             </h3>
             {asistentes.length === 0 ? (
-              <p className="font-body text-carbon/50 text-sm">Aún nadie ha escaneado el QR.</p>
+              <p className="font-body text-crema/50 text-sm">Aún nadie ha escaneado el QR.</p>
             ) : (
               <ul className="space-y-2">
                 {asistentes.map((a) => (
-                  <li key={a.id} className="bg-hueso rounded px-3 py-2 text-sm font-body text-carbon/70">
+                  <li key={a.id} className="bg-white/5 rounded px-3 py-2 text-sm font-body text-crema/70">
                     {a.profiles?.nombre || "Alumno"}
                   </li>
                 ))}

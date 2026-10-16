@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Trash2 } from "lucide-react";
 import { supabase } from "../../../lib/supabaseClient";
 import { useAuth } from "../../../context/AuthContext";
+import BitacoraItem from "../../../components/portal/BitacoraItem";
 
 export default function Bitacoras() {
   const { user } = useAuth();
@@ -45,19 +46,19 @@ export default function Bitacoras() {
 
   return (
     <div className="space-y-6">
-      <form onSubmit={publicar} className="bg-crema rounded-lg p-6 shadow-sm border border-carbon/5">
-        <label className="font-body font-bold text-carbon text-sm block mb-2">Nueva bitácora</label>
+      <form onSubmit={publicar} className="portal-card p-6">
+        <label className="font-body font-bold text-crema text-sm block mb-2">Nueva bitácora</label>
         <textarea
           value={contenido}
           onChange={(e) => setContenido(e.target.value)}
           rows={4}
           placeholder="¿Qué se trabajó en la clase de hoy?"
-          className="w-full px-3 py-2 rounded border border-carbon/20 text-sm font-body focus:outline-none focus:border-dorado resize-none"
+          className="portal-input w-full resize-none"
         />
         <button
           type="submit"
           disabled={enviando}
-          className="mt-3 bg-carbon hover:bg-tierra text-crema font-bold px-5 py-2 rounded text-sm transition-colors disabled:opacity-50"
+          className="portal-btn mt-3"
         >
           {enviando ? "Publicando..." : "Publicar"}
         </button>
@@ -65,27 +66,24 @@ export default function Bitacoras() {
 
       <div className="space-y-3">
         {cargando ? (
-          <p className="font-body text-carbon/50 text-sm">Cargando...</p>
+          <p className="font-body text-crema/50 text-sm">Cargando...</p>
         ) : bitacoras.length === 0 ? (
-          <p className="font-body text-carbon/50 text-sm">Todavía no has publicado ninguna bitácora.</p>
+          <p className="font-body text-crema/50 text-sm">Todavía no has publicado ninguna bitácora.</p>
         ) : (
           bitacoras.map((b) => (
-            <div
+            <BitacoraItem
               key={b.id}
-              className="bg-crema rounded-lg p-4 border border-carbon/5 flex justify-between gap-4"
-            >
-              <div>
-                <p className="font-body text-dorado text-xs font-bold mb-1">{b.fecha}</p>
-                <p className="font-body text-carbon/70 text-sm whitespace-pre-wrap">{b.contenido}</p>
-              </div>
-              <button
-                onClick={() => eliminar(b.id)}
-                className="text-carbon/30 hover:text-rojo shrink-0"
-                aria-label="Eliminar bitácora"
-              >
-                <Trash2 size={16} />
-              </button>
-            </div>
+              bitacora={b}
+              acciones={
+                <button
+                  onClick={() => eliminar(b.id)}
+                  className="text-crema/30 hover:text-rojo shrink-0 self-start"
+                  aria-label="Eliminar bitácora"
+                >
+                  <Trash2 size={16} />
+                </button>
+              }
+            />
           ))
         )}
       </div>
