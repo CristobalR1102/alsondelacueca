@@ -1,16 +1,26 @@
-# React + Vite
+# Al Son de la Cueca — Academia de baile
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+🚧 **En desarrollo** para una academia de cueca real en Maipú.
 
-Currently, two official plugins are available:
+🔗 Preview: https://alsondelacueca.vercel.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Landing page pública y portal privado para la gestión de la academia.
 
-## React Compiler
+## Landing
+Clases y horarios, planes, el profesor, galería, playlist de Spotify, testimonios, preguntas frecuentes y contacto por WhatsApp.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Portal (en desarrollo)
+- Login sin contraseña con magic link (Supabase Auth)
+- Vistas y permisos distintos según el rol (alumno / profesor)
+- Registro de asistencia con check-in por código QR
+- Bitácora diaria de clases
+- Más funcionalidades por definir con la academia
 
-## Expanding the Oxlint configuration
+## Stack
+React 19 · Vite · Tailwind CSS · React Router 7 · Supabase (Auth, Postgres, Edge Functions, Realtime) · Vercel
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Correr localmente
+```bash
+npm install
+npm run dev
+```
