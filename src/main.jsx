@@ -5,6 +5,7 @@ import './index.css'
 import App from './App.jsx'
 import Login from './pages/Login.jsx'
 import Checkin from './pages/Checkin.jsx'
+import Privacidad from './pages/Privacidad.jsx'
 import { AuthProvider } from './context/AuthContext.jsx'
 import ProtectedRoute from './components/portal/ProtectedRoute.jsx'
 import PortalLayout from './components/portal/PortalLayout.jsx'
@@ -42,6 +43,7 @@ createRoot(document.getElementById('root')).render(
             <Route path="*" element={<Navigate to="/portal" replace />} />
           </Route>
           <Route path="/checkin/:token" element={<Checkin />} />
+          <Route path="/privacidad" element={<Privacidad />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

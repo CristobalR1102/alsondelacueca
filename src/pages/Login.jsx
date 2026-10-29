@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
 import { useAuth } from "../context/AuthContext";
 
@@ -78,6 +78,14 @@ export default function Login() {
             </button>
           </form>
         )}
+
+        <p className="font-body text-carbon/40 text-xs text-center mt-6">
+          Al entrar aceptas nuestra{" "}
+          <Link to="/privacidad" className="underline hover:text-dorado">
+            política de privacidad
+          </Link>
+          .
+        </p>
       </div>
     </div>
   );

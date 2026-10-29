@@ -1,127 +1,96 @@
-# Plan del portal — inspirado en la app de "Lote Chileno"
+# Plan del portal
 
-Referencia: video de la app de Lote Chileno (2026-10-15). Prioridades elegidas:
-**Agenda + ausencias** y **Perfil + cumpleaños**. Ranking/XP, tests, anuncios,
-directorio, media y notificaciones push quedan para después.
+Última revisión: 2026-10-29. Lo que más le interesa al cliente (Bastián):
 
-Ojo con una diferencia de fondo: Lote Chileno es un **club** (integrantes,
-campeonatos, director). Al Son de la Cueca es una **academia** con alumnos que
-pagan un plan (`4_clases` / `mensual`). Por eso algunas ideas se adaptan
-(ver Ausencias).
+1. **Tareas**: cosas que el profe publica para que los alumnos corrijan o
+   practiquen. Solo se publican y se ven: sin entregas ni "marcar como hecha".
+2. **Marcar asistencia** con QR.
+3. **Diario de clase** tipo blog, **visible solo para alumnos**.
 
-## Comparación rápida
+## Decisiones tomadas
 
-| App del video | Portal actual | Plan |
-|---|---|---|
-| Asistencia con QR | ✅ `sesiones` + `asistencia` + Realtime | se mantiene |
-| Diario de ensayo | ✅ `bitacoras` | se mantiene |
-| Roles director / integrante | ✅ `profe` / `alumno` | se mantiene |
-| Inicio con "Lo próximo" y KPIs | ❌ | Fase 1 |
-| Barra inferior, modo oscuro | ❌ (portal claro, sin navegación) | Fase 1 |
-| Agenda de ensayos y eventos | ❌ | Fase 2 |
-| Avisos de ausencia | ❌ | Fase 3 |
-| Perfil (foto, apodo, comuna, cueca favorita, "¿por qué bailas?") | ❌ (solo `nombre`) | Fase 4 |
-| Cumpleaños del mes / aviso del día | ❌ | Fase 4 |
-| Ranking "Podio de Garra", XP, tests | ❌ | Más adelante |
-| Anuncios, encuestas, directorio, media, push | ❌ | Más adelante |
+- Los videos de práctica de alumnos para que el profe corrija **no** van en
+  la app: eso se resuelve por WhatsApp.
+- Los videos de las tareas/diario van como **enlace de YouTube "no listado"**
+  (incrustado). Supabase Storage solo para fotos (comprimidas).
+- **Sin respaldos**: los datos son fáciles de volver a cargar.
+- Hosting en **Cloudflare** (no Vercel). Supabase y Resend en **cuentas del
+  cliente**.
+- Login con **Google** además del correo.
+- Si un alumno de plan `4_clases` usa todas sus clases: **no se bloquea**; se
+  muestra en el panel del profe y se envía un **aviso**.
+- Página de **privacidad** en `/privacidad` (enlazada en footer y login).
+- Notificaciones **push** vía PWA: sí (Android siempre; iPhone solo con la app
+  instalada en la pantalla de inicio, iOS 16.4+).
 
-## Fase 0 — Requisito previo (sin esto nadie real puede entrar)
+## Fase 0 — Infraestructura en cuentas del cliente (en curso)
 
-- **Dominio propio + verificarlo en Resend.** Hoy el SMTP solo envía a
-  `cristobalrenato.2005@gmail.com`, así que ningún alumno real recibe el magic
-  link. Cualquier función nueva queda sin usar hasta resolver esto.
-- **Checkin → volver al QR después de loguearse.** Hoy el alumno sin sesión
-  tiene que escanear dos veces. Arreglo chico: pasar `?next=/checkin/<token>`
-  al login y redirigir ahí al volver.
+1. **Dominio**: si es `.cl`, se compra en NIC Chile y se apuntan los
+   nameservers a Cloudflare (Cloudflare no vende `.cl`). Si es `.com`, se
+   puede comprar directo en Cloudflare.
+2. **Supabase (proyecto nuevo en la cuenta del cliente)**:
+   - SQL Editor → correr [`supabase/schema.sql`](../supabase/schema.sql).
+   - Desplegar la Edge Function `create-student`.
+   - Authentication → URL Configuration: Site URL = `https://<dominio>` y
+     redirect URLs `https://<dominio>/**` (+ `http://localhost:5173/**`).
+   - Crear la cuenta del profe y marcarla `rol = 'profe'` en `profiles`.
+3. **Resend**: verificar el dominio (registros DNS en Cloudflare) y configurar
+   el SMTP de Supabase con remitente `no-responder@<dominio>`.
+4. **Cloudflare Workers**: conectar el repo (Workers & Pages → Create →
+   Import a repository). Build `npm run build`, deploy `npx wrangler deploy`
+   (config en [`wrangler.jsonc`](../wrangler.jsonc)). Variables de **build**:
+   `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`. Agregar el dominio como
+   Custom Domain.
+5. **Google login**: Google Cloud Console → OAuth consent screen + OAuth
+   client (Web). Redirect URI: `https://<proyecto>.supabase.co/auth/v1/callback`.
+   Pegar Client ID/Secret en Supabase → Authentication → Providers → Google.
+6. Apagar el proyecto de Vercel y borrar `vercel.json`.
 
-## Fase 1 — Base visual del portal (sin tablas nuevas)
+## Fase 1 — Portal oscuro con barra inferior ✅
 
-El comentario del video ("con menos información se ve más elegante") es la
-dirección de diseño: oscuro, limpio y con poco texto.
+Hecha (commit `8531900`).
 
-- Portal en azul marino (`carbon`) con tarjetas `#0F2147`, acentos dorado/rojo.
-- Barra inferior fija en el celular: **Inicio · Agenda · Perfil · Más**
-  (en escritorio, pestañas arriba). Se convierte en rutas: `/portal`,
-  `/portal/agenda`, `/portal/perfil`, `/portal/mas`.
-- **Inicio del alumno:** saludo + plan + clases restantes + "Próxima clase:
-  miércoles 19:00" (por ahora se calcula con la regla fija mié/vie).
-- **Inicio del profe:** KPIs (alumnos activos, asistencias del mes) y accesos
-  a Tomar asistencia, Bitácoras y Alumnos.
-- Tamaño: chico/mediano. Solo cambia el front.
+## Fase 2 — Acceso: Google + aprobación del profe
 
-## Fase 2 — Agenda
+- Botón "Entrar con Google" en `/login` (`signInWithOAuth`).
+- Con Google cualquiera puede crear cuenta, así que se agrega
+  `profiles.estado` (`pendiente` | `activo`). Los alumnos invitados por el
+  profe quedan `activo`; los que llegan solos quedan `pendiente` hasta que el
+  profe los aprueba desde Alumnos. Si un invitado entra con Google con el
+  mismo correo, Supabase une ambas identidades.
+- RLS: diario, tareas y asistencia solo para alumnos `activo` (y el profe).
+- Opcional: código de 6 dígitos por correo en vez de magic link (el enlace
+  se pierde al abrirse en el navegador interno de Gmail).
+- Checkin: después de iniciar sesión, volver al `/checkin/<token>`.
 
-Nueva tabla `eventos`:
+## Fase 3 — Asistencia confiable
 
-```
-id, tipo ('clase_especial' | 'sin_clase' | 'presentacion' | 'campeonato' | 'peña' | 'otro'),
-titulo, fecha, hora_inicio, hora_fin, lugar, descripcion, creado_por, created_at
-```
+- El QR solo sirve si la sesión está **activa y es de hoy** (validado en la
+  base, no solo en la página). El profe **cierra la clase** al terminar.
+- El profe puede **marcar asistencia a mano** (alumno sin batería/datos).
+- Alumno que se queda sin clases: aparece destacado en el Inicio del profe
+  (ya existe) + aviso (push en Fase 6).
 
-- Las clases normales (mié y vie, 19–21) **no se guardan una por una**: el
-  front las genera con la regla fija. En la tabla solo van las excepciones
-  (`sin_clase` por feriado, por ejemplo) y los eventos extra.
-- RLS: todo usuario autenticado lee; solo el profe crea/edita/borra.
-- Profe: formulario para crear/editar eventos. Alumno: lista "Próximos" con
-  etiquetas de color por tipo y una cuenta regresiva en el Inicio
-  ("En 2 días · 19:00").
-- Opcional: vincular `sesiones.evento_id` cuando el QR se genera para un
-  evento puntual.
+## Fase 4 — Diario de clase (solo alumnos)
 
-## Fase 3 — Avisos de ausencia
+- Las bitácoras pasan a publicaciones con título, texto con formato, fotos y
+  enlaces de YouTube.
+- El componente de "publicación con medios" se reutiliza para tareas.
 
-Nueva tabla `ausencias`:
+## Fase 5 — Tareas
 
-```
-id, alumno_id, fecha (o evento_id), motivo, estado ('pendiente' | 'visto'), created_at
-```
+- Tabla `tareas` (título, descripción, enlaces/YouTube, fecha). El profe
+  publica, edita y borra; los alumnos activos solo las ven.
 
-- El alumno avisa desde la Agenda ("No puedo ir a esta clase") con un motivo
-  corto.
-- El profe ve en su Inicio "2 avisos de ausencia" y en "Tomar asistencia"
-  aparece quién avisó que no viene.
-- **Decisión pendiente:** en el club se *aprueba o rechaza*. En una academia
-  pagada eso tiene sentido solo si una ausencia avisada se puede
-  **recuperar** (ej. con plan de 4 clases, avisar con 24 h devuelve el cupo).
-  Si no hay política de recuperación, basta con "visto" (más simple).
-  → definir con Bastián.
+## Fase 6 — PWA + notificaciones push
 
-## Fase 4 — Perfil y cumpleaños
+- Manifest + service worker (instalable en la pantalla de inicio).
+- Claves VAPID, tabla `push_subscriptions` y Edge Function que envía.
+- Avisos: nueva tarea, nueva entrada del diario, "se acabaron tus clases"
+  (al alumno) y "X usó su última clase" (al profe).
 
-Columnas nuevas en `profiles`:
+## Después (no prioritario)
 
-```
-apodo, foto_url, fecha_nacimiento, comuna, cueca_favorita, por_que_bailo,
-instagram, whatsapp, mostrar_instagram, mostrar_whatsapp
-```
-
-- Foto: bucket `avatars` en Supabase Storage (cada alumno sube solo la suya;
-  `capture` en el input permite tomarla con la cámara del celular).
-- "Tu camino": clases asistidas (conteo de `asistencia`) y desde cuándo baila
-  en la academia (`created_at`).
-- Personalización estilo "Chamanto / banda de rosas": dejarlo para después;
-  con foto + datos ya se siente propio.
-- **Cumpleaños:** sección "Cumpleaños de octubre" en el Inicio y una franja
-  "¡Hoy está de cumpleaños X!".
-- **Privacidad (importante):** hoy la RLS de `profiles` solo deja ver la
-  propia fila (o todas si eres profe). Para que los alumnos vean cumpleaños y
-  fotos de los demás **no** se abre la tabla: se crea una función
-  `security definer` (o vista) que devuelve solo `apodo`, `foto_url`,
-  día/mes de cumpleaños (nunca el año ni el teléfono) y los contactos marcados
-  como visibles.
-
-## Más adelante (no prioritario)
-
-- **Ranking / XP** ("Podio de Garra"): puntos por asistencia; se apoya en
-  `asistencia`, casi sin tablas nuevas. Buen siguiente paso tras la Fase 4.
-- **Tests teóricos** (métrica, estructura de la cueca) que dan XP.
-- **Anuncios** (las bitácoras pueden cubrir parte de esto).
-- **Notificaciones push**: requiere convertir el sitio en PWA (manifest +
-  service worker + Web Push). Es lo más costoso; recién vale la pena con
-  alumnos usando el portal de verdad.
-
-## Orden sugerido
-
-0 → 1 → 2 → 4 → 3. Las fases 2 y 4 no tocan los mismos archivos, así que se
-pueden trabajar en paralelo una vez lista la Fase 1 (que define rutas y
-navegación). La Fase 3 depende de la Agenda.
+- Agenda con eventos (presentaciones, días sin clase) y avisos de ausencia.
+- Perfil (foto, apodo, cueca favorita) y cumpleaños.
+- Ranking / XP, encuestas.

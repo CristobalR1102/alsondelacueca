@@ -16,6 +16,12 @@ export default function Footer() {
           >
             Portal de alumnos
           </a>
+          <a
+            href="/privacidad"
+            className="font-body text-crema/40 hover:text-dorado text-xs transition-colors"
+          >
+            Privacidad
+          </a>
           <p className="font-body text-crema/20 text-xs">Hecho con ❤️ en Chile</p>
         </div>
       </div>
