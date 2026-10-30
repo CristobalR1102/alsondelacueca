@@ -25,15 +25,15 @@
 
 ## Fase 0 — Infraestructura en cuentas del cliente (en curso)
 
-1. **Dominio**: si es `.cl`, se compra en NIC Chile y se apuntan los
-   nameservers a Cloudflare (Cloudflare no vende `.cl`). Si es `.com`, se
-   puede comprar directo en Cloudflare.
-2. **Supabase (proyecto nuevo en la cuenta del cliente)**:
-   - SQL Editor → correr [`supabase/schema.sql`](../supabase/schema.sql).
-   - Desplegar la Edge Function `create-student`.
-   - Authentication → URL Configuration: Site URL = `https://<dominio>` y
-     redirect URLs `https://<dominio>/**` (+ `http://localhost:5173/**`).
-   - Crear la cuenta del profe y marcarla `rol = 'profe'` en `profiles`.
+1. **Dominio** `alsondelacueca.cl` ✅: comprado en NIC Chile con nameservers
+   `grannbo.ns.cloudflare.com` y `yoxall.ns.cloudflare.com`. Agregado en
+   Cloudflare (plan Free); esperando que pase a **Active**.
+2. **Supabase**: el proyecto ya existe en la cuenta del cliente
+   (org "Al Son De La Cueca", ref `diqbgkuesnvusliyfrab`, sa-east-1) con las
+   tablas, `create-student` desplegada y usuarios. No se crea uno nuevo. Falta:
+   - Authentication → URL Configuration: Site URL = `https://alsondelacueca.cl`
+     y redirect URLs `https://alsondelacueca.cl/**` (+ `http://localhost:5173/**`).
+     Hoy solo tiene `https://alsondelacueca.vercel.app/portal`.
 3. **Resend**: verificar el dominio (registros DNS en Cloudflare) y configurar
    el SMTP de Supabase con remitente `no-responder@<dominio>`.
 4. **Cloudflare Workers**: conectar el repo (Workers & Pages → Create →
@@ -42,7 +42,7 @@
    `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`. Agregar el dominio como
    Custom Domain.
 5. **Google login**: Google Cloud Console → OAuth consent screen + OAuth
-   client (Web). Redirect URI: `https://<proyecto>.supabase.co/auth/v1/callback`.
+   client (Web). Redirect URI: `https://diqbgkuesnvusliyfrab.supabase.co/auth/v1/callback`.
    Pegar Client ID/Secret en Supabase → Authentication → Providers → Google.
 6. Apagar el proyecto de Vercel y borrar `vercel.json`.
 
